@@ -2,7 +2,7 @@
 //  task_tracker.cpp
 //  coursera
 //
-//  Created by Денис Домашевич on 10/1/18.
+//  Created by Денис Домашевич on 01/24/19.
 //  Copyright © 2018 Денис Домашевич. All rights reserved.
 //
 
@@ -38,9 +38,9 @@ public:
         sum += table[person][TaskStatus::NEW];
         sum += table[person][TaskStatus::IN_PROGRESS];
         sum += table[person][TaskStatus::TESTING];
-                             
-        task_count = std::fmin(task_count, sum);
-                             
+        
+        task_count = fmin(task_count, sum);
+        
         while(task_count--) {
             if(table[person][TaskStatus::NEW]) {
                 table[person][TaskStatus::NEW]--;
@@ -54,7 +54,18 @@ public:
             }
         }
         
-        result = std::tuple<TasksInfo, TasksInfo>(new_status, table[person]);
+        for(TaskStatus curr = TaskStatus::NEW; curr != TaskStatus::DONE;
+            curr = static_cast<TaskStatus>(static_cast<int>(curr) + 1)) {
+            if(table.at(person).at(curr) == 0) {
+                table[person].erase(curr);
+            }
+        }
+        
+        TasksInfo curr_person = table[person];
+        if(curr_person[TaskStatus::DONE]) {
+            curr_person.erase(TaskStatus::DONE);
+        }
+        result = std::tuple<TasksInfo, TasksInfo>(new_status, curr_person);
         
         for(const auto &it : new_status) {
             table[person][it.first] += it.second;
@@ -103,13 +114,3 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
