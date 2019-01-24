@@ -24,15 +24,15 @@ class Rect : public Figure {
 public:
     Rect(long double width, long double height)
         : _width(width), _height(height) {}
-    
+
     std::string Name() {
         return std::string("RECT");
     }
-    
+
     long double Perimetr() {
         return 2 * (_width + _height);
     }
-    
+
     long double Area() {
         return _width * _height;
     }
@@ -45,15 +45,15 @@ class Circle : public Figure {
 public:
     Circle(long double radius)
         : _radius(radius) {}
-    
+
     std::string Name() {
         return std::string("CIRCLE");
     }
-    
+
     long double Perimetr() {
         return 2 * M_PI * _radius;
     }
-    
+
     long double Area() {
         return M_PI * _radius * _radius;
     }
@@ -66,11 +66,11 @@ class Triangle : public Figure {
 public:
     Triangle(long double a, long double b, long double c)
         :_a(a), _b(b), _c(c) {}
-    
+
     std::string Name() {
         return std::string("TRIANGLE");
     }
-    
+
     long double Perimetr() {
         return _a + _b + _c;
     }
@@ -87,7 +87,7 @@ private:
 std::shared_ptr<Figure> CreateFigure(std::istringstream& is){
     std::string figure_type;
     is >> figure_type;
-    
+
     if(figure_type == "RECT") {
         long double width, height;
         is >> width >> height;
@@ -103,19 +103,19 @@ std::shared_ptr<Figure> CreateFigure(std::istringstream& is){
         is >> a >> b >> c;
         return std::shared_ptr<Figure>(new Triangle(a, b, c));
     }
-    
+
     return nullptr;
 }
 
 int main(int argc, const char * argv[]) {
-    
+
     std::vector <std::shared_ptr<Figure>> figures;
     for(std::string line; std::getline(std::cin, line);) {
         std::istringstream is(line);
-        
+
         std::string command;
         is >> command;
-        
+
         if(command == "ADD") {
             figures.push_back(CreateFigure(is));
         } else if(command == "PRINT") {
@@ -129,7 +129,6 @@ int main(int argc, const char * argv[]) {
             break;
         }
     }
-    
+
     return 0;
 }
-
