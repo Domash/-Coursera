@@ -2,7 +2,7 @@
 //  sum_reverse_sort.cpp
 //  coursera
 //
-//  Created by Денис Домашевич on 1/24/19.
+//  Created by Денис Домашевич on 1/25/19.
 //  Copyright © 2018 Денис Домашевич. All rights reserved.
 //
 
