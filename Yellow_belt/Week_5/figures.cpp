@@ -16,7 +16,7 @@
 class Figure {
 public:
     virtual std::string Name() = 0;
-    virtual long double Perimetr() = 0;
+    virtual long double Perimeter() = 0;
     virtual long double Area() = 0;
 };
 
@@ -25,15 +25,15 @@ public:
     Rect(long double width, long double height)
         : _width(width), _height(height) {}
 
-    std::string Name() {
+    std::string Name() override {
         return std::string("RECT");
     }
 
-    long double Perimetr() {
+    long double Perimeter() override {
         return 2 * (_width + _height);
     }
 
-    long double Area() {
+    long double Area() override {
         return _width * _height;
     }
 
@@ -46,16 +46,16 @@ public:
     Circle(long double radius)
         : _radius(radius) {}
 
-    std::string Name() {
+    std::string Name() override {
         return std::string("CIRCLE");
     }
 
-    long double Perimetr() {
-        return 2 * M_PI * _radius;
+    long double Perimeter() override {
+        return 2 * 3.14 * _radius;
     }
 
-    long double Area() {
-        return M_PI * _radius * _radius;
+    long double Area() override {
+        return 3.14 * _radius * _radius;
     }
 
 private:
@@ -67,15 +67,15 @@ public:
     Triangle(long double a, long double b, long double c)
         :_a(a), _b(b), _c(c) {}
 
-    std::string Name() {
+    std::string Name() override {
         return std::string("TRIANGLE");
     }
 
-    long double Perimetr() {
+    long double Perimeter() override {
         return _a + _b + _c;
     }
 
-    long double Area() {
+    long double Area() override {
         long double p = (_a + _b + _c) / 2;
         return sqrt(p * (p - _a) * (p - _b) * (p - _c));
     }
@@ -107,7 +107,7 @@ std::shared_ptr<Figure> CreateFigure(std::istringstream& is){
     return nullptr;
 }
 
-int main(int argc, const char * argv[]) {
+int main() {
 
     std::vector <std::shared_ptr<Figure>> figures;
     for(std::string line; std::getline(std::cin, line);) {
@@ -122,7 +122,7 @@ int main(int argc, const char * argv[]) {
             for(const auto& current_figure : figures) {
                 std::cout << std::fixed << std::setprecision(3)
                 << current_figure -> Name() << ' '
-                << current_figure -> Perimetr() << ' '
+                << current_figure -> Perimeter() << ' '
                 << current_figure -> Area() << ' ' << std::endl;
             }
         } else if(command == "EXIT") {
