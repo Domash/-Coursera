@@ -1,5 +1,5 @@
 //
-//  arithmetic expression_v_1.cpp
+//  arithmetic_expression_v_1.cpp
 //  coursera
 //
 //  Created by Денис Домашевич on 1/29/19.
