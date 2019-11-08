@@ -1,0 +1,1 @@
+My courses from the educational platform [Coursera](https://www.coursera.org)

@@ -156,9 +156,6 @@ void TestEmptyBuffer() {
 }
 
 int main() {
-
-
-
   TestRunner tr;
    RUN_TEST(tr, TestEditing);
    RUN_TEST(tr, TestReverse);
